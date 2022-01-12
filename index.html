@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 25px;
+            background-color: white;
+            color: black;
+            font-size: 20px;
+        }
+
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+
+        .continer {
+            margin-right: auto;
+            margin-left: auto;
+            padding-left: 30px;
+            padding-right: 30px;
+            max-width: 1300px;
+
+        }
+
+        .raw {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+        }
+
+        input[type=text],
+        [type=password],
+        [type=number],
+        textarea {
+            width: 100%;
+            /* Full width */
+            padding: 12px;
+            /* Some padding */
+            border: 1px solid #ccc;
+            /* Gray border */
+            border-radius: 4px;
+            /* Rounded borders */
+            box-sizing: border-box;
+            /* Make sure that padding and width stays in place */
+            margin-top: 6px;
+            /* Add a top margin */
+            margin-bottom: 16px;
+            /* Bottom margin */
+            resize: vertical;
+            /* Allow the user to vertically resize the textarea (not horizontally) */
+            box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        input[type=submit] {
+            background-color: palevioletred;
+
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function myFunction() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+        }
+        function validateForm() {
+            let x = document.forms["myForm"]["fname"].value;
+            if (x == "" || x.length < 3 || x.length > 10) {
+                alert("must be more than three and less than ten characters");
+                return false;
+            }
+
+            // validate email
+            var uemail = document.forms["myForm"]["email"].value;
+
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (!uemail.match(mailformat)) {
+
+                alert("You have entered an invalid email address!");
+
+                return false;
+            }
+
+            // validate password
+            var upw = document.forms["myForm"]["pw"].value;
+
+            if (upw == "") {
+                alert("Enter valid passward address");
+                return false;
+            }
+            var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+            if (!upw.match(re)) {
+
+                alert("You have entered an invalid password address!");
+
+                return false;
+            }
+
+            // minimum password length validation  
+            if (upw.length < 6) {
+                alert("at less 6 letter");
+                return false;
+            }
+
+
+
+            ////////////////////////confirm passs
+            var upw2 = document.forms["myForm"]["pw2"].value;
+            if (upw2 == "") {
+                alert("Enter confirm passward address");
+                return false;
+            }
+            if (upw != upw2) {
+                alert("Passwords did not match");
+            }
+
+
+            //////////////////////////////////////////// validate age
+            var uage = document.forms["myForm"]["age"].value;
+            console.log(uage);
+            if (uage < 18) {
+                alert("you must be over 18 years old");
+                return false;
+            }
+            //////////////////////validate phone
+            var uphone = document.forms["myForm"]["phone"].value;
+            star = uphone.slice(0, 3)
+            if (!(uphone.length == 9) || !(star == "777")) {
+                alert("It should be 9 digits long and start with 777");
+                return false;
+            }
+            ///////////////////URL
+            var furl = document.forms["myForm"]["url"].value;
+
+            var re = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+
+            if (!furl.match(re)) {
+
+                alert("You have entered an invalid url!");
+
+
+                return false;
+            }
+
+
+
+            /////// validate msg
+            var msg = document.forms["myForm"]["txt"].value;
+            if (msg.length < 20) {
+                alert("at less 20 letter");
+                return false;
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <button onclick="myFunction()">dark mode</button>
+    <div class="continer">
+        <div class="raw">
+            <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+                Name:
+                <br>
+                <input type="text" name="fname">
+                <br>
+                Email:
+                <input type="text" name="email">
+                Enter Password:
+                <input type="password" name="pw">
+                <br>
+                Confirm Password:
+                <input type="password" name="pw2">
+                <br>
+                Age:
+                <input type="number" name="age">
+                <br>
+                Phone:
+                <input type="text" name=phone>
+                <br>
+                URL:
+                <input type="text" name=url>
+                </br>
+                Massage:
+
+                <textarea name="txt"></textarea>
+                <br>
+                <input type="submit" value="Submit">
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
