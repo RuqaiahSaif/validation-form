@@ -76,8 +76,8 @@
         function validateForm() {
             let x = document.forms["myForm"]["fname"].value;
             if (x == "" || x.length < 3 || x.length > 10) {
-                alert("must be more than three and less than ten characters");
-                return false;
+                document.getElementById("nameErorr").innerHTML = "Name must be more than three and less than ten characters";
+
             }
 
             // validate email
@@ -85,32 +85,27 @@
 
             var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             if (!uemail.match(mailformat)) {
-
-                alert("You have entered an invalid email address!");
-
-                return false;
+                document.getElementById("emailErorr").innerHTML = "You have entered an invalid email address!";
             }
 
             // validate password
             var upw = document.forms["myForm"]["pw"].value;
 
             if (upw == "") {
-                alert("Enter valid passward address");
-                return false;
+                document.getElementById("passErorr").innerHTML = "Enter passward!";
             }
             var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
             if (!upw.match(re)) {
-
-                alert("You have entered an invalid password address!");
-
-                return false;
+                document.getElementById("passErorr").innerHTML = "It must contain an uppercase letter, symbol, lowercase letters and numbers";
+               // return false;
             }
 
             // minimum password length validation  
             if (upw.length < 6) {
-                alert("at less 6 letter");
-                return false;
+
+                document.getElementById("passErorr").innerHTML = "at less 6 letter!";
+                //return false;
             }
 
 
@@ -118,11 +113,13 @@
             ////////////////////////confirm passs
             var upw2 = document.forms["myForm"]["pw2"].value;
             if (upw2 == "") {
-                alert("Enter confirm passward address");
-                return false;
+
+                document.getElementById("cpassErorr").innerHTML = "Enter confirm passward address!";
             }
             if (upw != upw2) {
-                alert("Passwords did not match");
+
+                document.getElementById("cpassErorr").innerHTML = "Passwords did not match!";
+                return false;
             }
 
 
@@ -130,15 +127,16 @@
             var uage = document.forms["myForm"]["age"].value;
             console.log(uage);
             if (uage < 18) {
-                alert("you must be over 18 years old");
-                return false;
+                document.getElementById("ageErorr").innerHTML = "you must be over 18 years old!";
+
+              //  return false;
             }
             //////////////////////validate phone
             var uphone = document.forms["myForm"]["phone"].value;
             star = uphone.slice(0, 3)
-            if (!(uphone.length == 9) || !(star == "777")) {
-                alert("It should be 9 digits long and start with 777");
-                return false;
+            if (uphone == "" || !(uphone.length == 9) || !(star == "777")) {
+                document.getElementById("phoneErorr").innerHTML = "It should be 9 digits long and start with 777";
+               // return false;
             }
             ///////////////////URL
             var furl = document.forms["myForm"]["url"].value;
@@ -147,18 +145,14 @@
 
             if (!furl.match(re)) {
 
-                alert("You have entered an invalid url!");
-
-
-                return false;
+                document.getElementById("urlErorr").innerHTML = "You have entered an invalid url!";
+               // return false;
             }
-
-
 
             /////// validate msg
             var msg = document.forms["myForm"]["txt"].value;
             if (msg.length < 20) {
-                alert("at less 20 letter");
+                document.getElementById("msgErorr").innerHTML = "at less 20 letter";
                 return false;
             }
         }
@@ -174,28 +168,32 @@
                 Name:
                 <br>
                 <input type="text" name="fname">
-                <br>
+                <p id="nameErorr" style="color:red"></p>
+
                 Email:
                 <input type="text" name="email">
+                <p id="emailErorr" style="color:red"></p>
                 Enter Password:
                 <input type="password" name="pw">
-                <br>
+                <p id="passErorr" style="color:red"></p>
                 Confirm Password:
                 <input type="password" name="pw2">
-                <br>
+                <p id="cpassErorr" style="color:red"></p>
+
                 Age:
                 <input type="number" name="age">
-                <br>
+                <p id="ageErorr" style="color:red"></p>
+
                 Phone:
                 <input type="text" name=phone>
                 <br>
+                <p id="phoneErorr" style="color:red"></p>
                 URL:
                 <input type="text" name=url>
-                </br>
+                <p id="urlErorr" style="color:red"></p>
                 Massage:
-
                 <textarea name="txt"></textarea>
-                <br>
+                <p id="msgErorr" style="color:red"></p>
                 <input type="submit" value="Submit">
 
             </form>
